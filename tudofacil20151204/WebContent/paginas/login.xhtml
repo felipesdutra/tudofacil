@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition 
+	template="../template/template.xhtml" 
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 	
+	<ui:define name="conteudo">
+		<h:form id="frmLogin" > 
+			<p:panel header="Acesso restrito - Identificação" style="width:300px;margin:auto" >
+				<h:outputText id="mensagem" value="#{usuarioMB.mensagem}"  />
+				<h:panelGrid columns="2" >
+					<h:outputLabel for="login" value="Login:" />
+					<p:inputText id="login" value="#{usuarioMB.usuario.login}" promptLabel="Informe o seu login"  autocomplete="off" required="true" />           
+					<h:outputLabel value="Senha:"/>
+					<p:password  value="#{usuarioMB.usuario.senhaweb}" />		
+				</h:panelGrid>
+				<p:commandButton value="Acessar" type="submit" action="#{usuarioMB.autenticar}" update ="mensagem" ajax="false"/>
+				<p:commandButton value="Limpar Campos" type="reset" />
+			</p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>
+	
+        

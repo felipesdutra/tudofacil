@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="../../template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form prependId="false" id="form">
+
+			<p:growl id="messages" showDetail="true" />
+
+			<p:dataTable id="dataTable" var="fun" value="#{funcionarioMB.lista}">
+				<f:facet name="header">  
+		           Funcionario  
+		        </f:facet>
+
+				<p:ajax event="rowEdit" listener="#{funcionarioMB.onEdit}"
+					update=":form:messages" />
+				<p:ajax event="rowEditCancel" listener="#{funcionarioMB.onCancel}"
+					update=":form:messages" />
+
+				<p:column headerText="Atribuição" style="text-align: center;width:30%">
+	           		 <p:cellEditor>
+	               		<f:facet name="output"><h:outputText value="#{fun.atribuicao.nome}" /></f:facet>	
+	               		<f:facet name="input">
+	                   		<h:selectOneMenu value="#{fun.atribuicao}" converter="atribuicaoConverter" >
+	                   		<f:selectItems value="#{atribuicaoMB.lista}" var="a" itemValue="#{a}" itemLabel="#{a.nome}"  />
+	                   		</h:selectOneMenu>
+	               		</f:facet>
+	           		</p:cellEditor>
+       			</p:column>					
+				
+				<p:column style="text-align: center">
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{fun.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{fun.nome}" style="width:96%"
+								label="Nome" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>	
+				
+				<p:column headerText="Hora de Entrada" style="text-align: center;width:90px">
+            	<p:cellEditor>
+	                <f:facet name="output">
+	                    <h:outputText value="#{fun.entrada}" >
+	                        <f:convertDateTime pattern="HH:mm" />
+	                    </h:outputText>
+	                </f:facet>
+	                <f:facet name="input">
+	                	<p:inputMask value="#{fun.entrada}" mask="99:99" label="Hora de Entrada" >
+	                		<f:convertDateTime pattern="HH:mm" />
+	                	</p:inputMask></f:facet>
+            	</p:cellEditor>
+        		</p:column>
+						
+				<p:column headerText="Hora de Almoço" style="text-align: center;width:90px">
+            	<p:cellEditor>
+	                <f:facet name="output">
+	                    <h:outputText value="#{fun.almoco}" >
+	                        <f:convertDateTime pattern="HH:mm" />
+	                    </h:outputText>
+	                </f:facet>
+	                <f:facet name="input">
+	                	<p:inputMask value="#{fun.almoco}" mask="99:99" label="Hora de Almoço" >
+	                		<f:convertDateTime pattern="HH:mm" />
+	                	</p:inputMask></f:facet>
+            	</p:cellEditor>
+        		</p:column>
+
+				<p:column style="text-align: center;">
+					<f:facet name="header" >
+						<h:outputText value="Tempo Total" />
+					</f:facet>					
+						<h:outputText value="#{fun.tempoTotal}" style="color: ;"/>
+				</p:column>	
+				
+				<p:dataTable id="dataTable" var="fun" rowStyleClass="#{fun.ativo ne 60 ? 'colored' : null}" value="#{funcionarioMB.lista}" style="width:1024px;" 
+				editable="true" paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,15,20,#{agenciasMB.lista.size()}"
+				 scrollable="true" scrollWidth="800" >
+				 
+				<f:facet name="header">  
+		           Listagem Completa
+		        </f:facet>
+		       
+		        
+				<p:ajax event="rowEdit" listener="#{funcionarioMB.onEdit}"
+					update=":form:messages" />
+				<p:ajax event="rowEditCancel" listener="#{funcionarioMB.onCancel}"
+					update=":form:messages" />		      
+									
+				<p:column filterBy="#{fun.funcionario.atribuicao}" headerText="Atribuição" filterMatchMode="contains" style="width:100px;">
+					<h:outputText value="#{fun.atribuicao}" />
+				</p:column>
+				
+				<p:column filterBy="#{fun.funcionario.nome}" headerText="Nome" filterMatchMode="contains" style="width:100px;">
+					<h:outputText value="#{fun.funcionario.nome}" />
+				</p:column>
+				
+				<p:column filterBy="#{fun.funcionario.entrada}" headerText="Hora de Entrada" filterMatchMode="contains" style="width:100px;">
+					<h:outputText value="#{fun.funcionario.entrada}" />
+				</p:column>
+				
+				<p:column filterBy="#{fun.funcionario.almoco}" headerText="Hora de Almoço" filterMatchMode="contains" style="width:100px;">
+					<h:outputText value="#{fun.funcionario.almoco}" />
+				</p:column>
+				
+				
+			</p:dataTable>	 
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+

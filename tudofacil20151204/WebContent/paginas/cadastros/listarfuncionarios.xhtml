@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition template="../../template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:define name="conteudo">
+
+		<h:form prependId="false" id="form">
+		<p:poll interval="3" update="form" />
+		<p:growl id="messages" showDetail="true" />
+			<h:panelGrid style="width:100%; height:50%;" columns="4">
+
+				<p:dataTable id="dataTable" var="fun"
+					rowStyleClass="#{fun.tempoTotal gt 360 ? 'colored' : null}"
+					value="#{funcionarioMB.lista}" style="width:80%;" editable="true"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,15,20,#{funcionarioMB.lista.size()}"
+					scrollable="true" scrollWidth="100%">
+
+					<f:facet name="header">  
+		           Listagem Completa
+		        	</f:facet>
+
+					<p:ajax event="rowEdit" listener="#{agenciasMB.onEdit}"
+						update=":form:messages" />
+					<p:ajax event="rowEditCancel" listener="#{agenciasMB.onCancel}"
+						update=":form:messages" />
+
+					<p:column headerText="Nome" style="width:200px;">
+						<h:outputText value="#{fun.nome}" />
+					</p:column>
+
+					<p:column headerText="Atribuição"
+						style="text-align: center;width:30%">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{fun.atribuicao.nome}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{fun.atribuicao}"
+									converter="atribuicaoConverter">
+									<f:selectItems value="#{atribuicaoMB.lista}" var="a"
+										itemValue="#{a}" itemLabel="#{a.nome}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="text-align: center">
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{fun.nome}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{fun.nome}" style="width:95%" label="Nome" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Hora de Entrada"
+						style="text-align: center;width:90px">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{fun.entrada}">
+									<f:convertDateTime pattern="HH:mm" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputMask value="#{fun.entrada}" mask="99:99"
+									label="Hora de Entrada">
+									<f:convertDateTime pattern="HH:mm" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Hora de Almoço"
+						style="text-align: center;width:90px">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{fun.almoco}">
+									<f:convertDateTime pattern="HH:mm" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputMask value="#{fun.almoco}" mask="99:99"
+									label="Hora de Almoço">
+									<f:convertDateTime pattern="HH:mm" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Tempo Total" />
+						</f:facet>
+						<h:outputText value="#{fun.tempoTotal}" style="color: ;" />
+					</p:column>
+
+					<p:column headerText="Horas no Computador"
+						style="text-align: center;width:90px">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{fun.horacomputador}">
+									<f:convertDateTime pattern="HH:mm" />
+								</h:outputText>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputMask value="#{fun.horacomputador}" mask="99:99"
+									label="Horas no Computador">
+									<f:convertDateTime pattern="HH:mm" />
+								</p:inputMask>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+
