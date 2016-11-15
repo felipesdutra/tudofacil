@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition 
+	template="../../template/template.xhtml" 
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 	
+	<ui:define name="conteudo">
+		<h:form id="frmUsuario" > 
+			<p:growl id="growl" showDetail="true"/>
+			<h:panelGrid columns="1" style="width:100%;text-align:center">   
+					<h:outputText id="mensagem" value="#{usuarioMB.mensagem}"  />
+			</h:panelGrid>
+			<p:panel header="Trocar senha" style="width:470px;margin:2% 25% 1% 25%;"  >
+				<h:panelGrid columns="3" id = "trocaSenha"> 
+
+				 	<h:outputLabel for="senhaatual" value="Senha Atual" />
+					<p:password id="senhaatual" value="#{usuarioMB.usuario.senhaweb}" label="Senha Atual"  />  
+					<p:message for="senhaatual" />
+
+				 	<h:outputLabel for="senha" value="Nova Senha" />
+					<p:password id="senha" value="#{usuarioMB.novoUsuario.senhaweb}" label="Nova Senha"  />  
+					<p:message for="senha" />
+
+				 	<h:outputLabel for="senharepetir" value="Repertir Nova Senha" />
+					<p:password id="senharepetir" value="#{usuarioMB.repetir}" label="Senha Repetir"  />  
+					<p:message for="senharepetir" />
+				</h:panelGrid>
+					
+				<p:commandButton  value="Alterar Senha" type="submit" action="#{usuarioMB.trocarSenha}" update="frmUsuario"  ajax="false"/>
+					
+			</p:panel>
+			
+		</h:form>
+
+  
+	</ui:define>
+	
+</ui:composition>
+	
+
+
+
+

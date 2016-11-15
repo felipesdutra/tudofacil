@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="../../template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form prependId="false" id="form">
+
+			<p:growl id="messages" showDetail="true" />
+
+			<p:dataTable id="dataTable" var="cid" value="#{cidadeMB.lista}"
+				editable="true" paginator="true" rows="15"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,15,20">
+				<f:facet name="header">  
+		           Cidade  
+		        </f:facet>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código" />
+					</f:facet>
+					<h:outputText value="#{cid.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrição" />
+					</f:facet>
+					<h:outputText value="#{cid.descricao}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Fazenda" />
+					</f:facet>
+					<h:outputText value="#{cid.fazenda}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="UF" />
+					</f:facet>
+					<h:outputText value="#{cid.uf}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+
