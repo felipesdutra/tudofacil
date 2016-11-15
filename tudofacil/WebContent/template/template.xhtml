@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="Tue, 01 Jan 2000 12:12:12 GMT" />
+
+	<title>Tudo Fácil</title>
+
+</h:head>
+<h:body>
+
+	<style type="text/css">
+.ui-widget {
+	font-size: 12px !important;
+}
+
+.colored {
+	color: red;
+}
+
+.colored2 {
+	color: green;
+}
+
+.colored3 {
+	color: gray;
+}
+
+.colored4 {
+	color: orange;
+}
+.ui-datatable-odd {
+	background: #F2F5F9;
+}
+
+.ui-datatable-even {
+	background: #ffffff;
+}
+</style>
+
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="125" resizable="false"
+			closable="false" collapsible="true">
+			<h:panelGrid columns="2" style="width:100%;text-align:left">
+				<h:panelGrid columns="1">
+					<h:graphicImage url="/logoFGTAS.png" />
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<span style="font-size: 30px"> Tudo Fácil </span>
+				</h:panelGrid>
+			</h:panelGrid>
+
+
+		</p:layoutUnit>
+
+
+
+		<p:layoutUnit position="center">
+			<h:form>
+				<p:growl id="messages" />
+			</h:form>
+			<h:form>
+
+				<p:megaMenu>
+					<p:submenu label="Tudo Fácil">
+						<p:column>
+							<p:submenu label="Funcionários">
+								<p:menuitem value="Inserir"
+									outcome="/paginas/cadastros/inserirfuncionario" />
+								<p:menuitem value="Listar"
+									outcome="/paginas/cadastros/listarfuncionarios" />
+								<p:menuitem value="Editar"
+									outcome="/paginas/cadastros/editarfuncionarios" />
+								<p:submenu label="Usuário">
+									<p:menuitem value="Inserir"
+										outcome="/paginas/cadastros/inserirusuario" />
+									<p:menuitem value="Listar/Editar"
+										outcome="/paginas/cadastros/listarusuario" />
+								</p:submenu>
+							</p:submenu>
+						</p:column>
+						<p:column>
+							<p:submenu label="Atribuição">
+								<p:menuitem value="Inserir"
+									outcome="/paginas/cadastros/inseriratribuicao" />
+								<p:menuitem value="Listar/Editar"
+									outcome="/paginas/cadastros/listaratribuicoes" />
+							</p:submenu>
+						</p:column>
+
+					</p:submenu>
+					<p:menuitem value="Trocar Senha"
+						outcome="/paginas/geral/trocarsenha" />
+					<p:menuitem value="Sair do Sistema" action="#{usuarioMB.logout}" />
+				</p:megaMenu>
+
+			</h:form>
+
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+</h:body>
+</html>

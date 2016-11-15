@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition 
+	template="../../template/template.xhtml" 
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 	
+	<ui:define name="conteudo">
+		<h:form id="frmUsuario" > 
+			<h:panelGrid columns="4" > 
+				<p:growl id="growl" showDetail="true"/>  
+				<h:outputText id="mensagem" value="#{usuarioMB.mensagem}"  />
+				<h:commandLink value="#{usuarioMB.url}" action="/paginas/cadastros/listarusuario"  />
+			</h:panelGrid>
+			<p:panel header="Novo Usuário" style="width:470px;margin:2% 25% 1% 25%;"  >
+				<h:panelGrid columns="3" id = "incluiUsuario"> 
+					<h:outputLabel for="login" value="Login" />
+					<p:inputText id="login" value="#{usuarioMB.novoUsuario.login}" label="login"  >
+					</p:inputText>
+					<p:message for="login" />
+					
+					<h:outputLabel for="nome" value="Nome do usuário" />
+					<p:inputText id="nome" value="#{usuarioMB.novoUsuario.nome}" label="nome"  >
+					</p:inputText>
+					<p:message for="nome" />
+					
+				 	<h:outputLabel for="perfil" value="Perfil" />
+					<p:selectOneMenu id="perfil" value="#{usuarioMB.novoUsuario.perfil}">
+						<f:selectItem itemLabel="Financeiro" itemValue="ROLE_MANAGER" />
+						<f:selectItem itemLabel="SAD" itemValue="ROLE_USER" />
+						<f:selectItem itemLabel="Compras" itemValue="ROLE_COMPRAS" />
+					</p:selectOneMenu>
+					<p:message for="perfil" />
+					
+				 	<h:outputLabel for="senha" value="Senha" />
+					<p:password id="senha" value="#{usuarioMB.novoUsuario.senhaweb}" label="senha"  />  
+					<p:message for="senha" />
+				</h:panelGrid>
+					
+				<p:commandButton  value="Novo" type="submit" action="#{usuarioMB.incluir}" update="frmUsuario"  ajax="false"/>
+					
+			</p:panel>
+			
+		</h:form>
+
+  
+	</ui:define>
+	
+</ui:composition>
+	
+
+
+
+

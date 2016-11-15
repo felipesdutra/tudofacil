@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition 
+	template="../../template/template.xhtml" 
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 	
+	<ui:define name="conteudo">
+		<h:form id="frmCidade" > 
+			<h:panelGrid columns="2" style="width:100%"> 
+				
+				<p:growl id="growl" showDetail="true"/>
+				<h:panelGrid columns="1" style="width:100%;text-align:center">   
+					<h:outputLabel value="#{cidadeMB.mensagem}" />
+				</h:panelGrid>
+   			</h:panelGrid>
+			
+			<p:panel header="Cadastro de Cidade" style="width:550px;margin:2% 25% 1% 25%;" >
+			<h:panelGrid columns="3" id="cad">
+					
+				 	<h:outputLabel for="codigo" value="Código" />
+					<p:inputText id="codigo" value="#{cidadeMB.cidade.codigo}" label="codigo" required="true" >
+					</p:inputText>
+					<p:message for="codigo" />
+						
+					
+					<h:outputLabel for="descricao" value="Descrição" />
+					<p:inputText id="descricao" value="#{cidadeMB.cidade.descricao}" label="descricao" required="true" maxlength="100">
+					</p:inputText>
+					<p:message for="descricao" />
+
+					<h:outputLabel for="fazenda" value="Fazenda" />
+					<p:inputText id="fazenda" value="#{cidadeMB.cidade.fazenda}" label="fazenda" >
+					</p:inputText>
+					<p:message for="fazenda" />
+					
+					<h:outputLabel for="uf" value="UF" />
+					<p:inputText id="uf" value="#{cidadeMB.cidade.uf}" label="UF" maxlength="2" >
+					</p:inputText>
+					<p:message for="uf" />
+					
+		 					 
+		
+			</h:panelGrid>
+			</p:panel>
+			
+			<h:panelGrid columns="3" id="operacoes" style="margin:2% 25% 1% 25%;">
+				<p:commandButton  value="Salvar" type="submit" action="#{cidadeMB.incluir}" update="frmCidade"  ajax="false"/>
+			</h:panelGrid>
+		</h:form>
+
+  
+	</ui:define>
+	
+</ui:composition>
+	
+
+
+
+
