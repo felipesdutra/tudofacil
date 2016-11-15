@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition 
+	template="../../template/template.xhtml" 
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 	
+	<ui:define name="conteudo">
+		<h:form id="frmFuncionario" > 
+			<h:panelGrid columns="3" > 
+				<p:growl id="growl" showDetail="true"/>  
+				<h:outputText id="mensagem" value="#{funcionarioMB.mensagem}"  />
+			</h:panelGrid>
+			<p:panel header="Novo Funcionário" style="width:470px;margin:2% 25% 1% 25%;"  >
+				<h:panelGrid columns="3" id = "incluiFuncionario"> 
+				
+					<h:outputLabel for="nome" value="Nome do usuário" />
+					<p:inputText id="nome" value="#{funcionarioMB.funcionario.nome}" label="nome"  >
+					</p:inputText>
+					<p:message for="nome" />
+					
+					<h:outputLabel for="atribuicao" value="Atribuicao" />
+						<p:selectOneMenu id="atribuicao" value="#{funcionarioMB.funcionario.atribuicao}"
+							converter="atribuicaoConverter" effect="fade"
+							panelStyle="width:140px">
+
+							<f:selectItems value="#{atribuicaoMB.lista}" var="fr"
+								itemValue="#{fr}" itemLabel="#{fr.nome}" />
+						</p:selectOneMenu>
+						<p:message for="atribuicao" />
+					
+
+					<h:outputLabel for="entrada" value="Hora de Entrada" />
+					<p:inputText id="entrada" value="#{funcionarioMB.funcionario.entrada}" label="entrada"  >
+					<f:convertDateTime dateStyle="date" pattern="HH:mm" />
+					</p:inputText>
+					<p:message for="entrada" />
+
+					<h:outputLabel for="almoco" value="Hora de Almoço" />
+					<p:inputText id="almoco" value="#{funcionarioMB.funcionario.almoco}" label="almoco"  >
+					<f:convertDateTime dateStyle="date" pattern="HH:mm" />
+					</p:inputText>
+					<p:message for="almoco" />
+					
+					<h:outputLabel for="horacomputador" value="Hora no computador" />
+					<p:inputText id="horacomputador" value="#{funcionarioMB.funcionario.horacomputador}" label="horacomputador"  >
+					<f:convertDateTime dateStyle="date" pattern="HH:mm" />
+					</p:inputText>
+					<p:message for="horacomputador" />
+
+				</h:panelGrid>
+					
+				<p:commandButton  value="Novo" type="submit" action="#{funcionarioMB.incluir}" update="frmFuncionario"  ajax="false"/>
+					
+			</p:panel>
+			
+		</h:form>
+
+  
+	</ui:define>
+	
+</ui:composition>
+	
+
+
+
+
